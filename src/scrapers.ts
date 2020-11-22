@@ -20,6 +20,7 @@ export const scrapeLutakko = async (): Promise<Gig[]> => {
           "",
         price: x.querySelector("div div a strong")?.textContent || "",
         link: url + x.querySelector("a")?.getAttribute("href") || "",
+        venue: "Lutakko",
         soldOut: x.textContent?.toLowerCase().includes("loppuunmyyty") || false,
         cancelled: x.textContent?.toLowerCase().includes("peruttu") || false,
       }
@@ -63,6 +64,7 @@ export const scrapeIlokivi = async (): Promise<Gig[]> => {
                 ?.textContent
             ) || "",
           link: detailUrl || "",
+          venue: "Ilokivi",
           price: price || "",
           soldOut:
             x.textContent?.toLowerCase().includes("loppuunmyyty") || false,
@@ -103,6 +105,7 @@ export const scrapePoppari = async (): Promise<Gig[]> => {
                 ?.textContent || ""
             ),
             link: url || "",
+            venue: "Poppari",
             price:
               x.querySelector("div.gig div.gigpress-date span.price")
                 ?.textContent || "",

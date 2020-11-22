@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2020 at 10:40 PM
+-- Generation Time: Nov 22, 2020 at 02:11 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -33,6 +33,7 @@ CREATE TABLE `gigs` (
   `date` varchar(500) NOT NULL,
   `price` varchar(500) NOT NULL,
   `link` varchar(500) NOT NULL,
+  `venue` varchar(500) NOT NULL,
   `soldOut` tinyint(1) NOT NULL,
   `cancelled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -4,6 +4,7 @@ declare type Gig = {
   date: string
   price: string
   link: string
+  venue: string
   soldOut: boolean
   cancelled: boolean
 }
