@@ -1,4 +1,6 @@
 import { getDom, parseDate } from "./util"
+import testgigs from "./testgigs.json"
+import newgigs from "./newgigs.json"
 
 /**
  * Scrape gig information from Lutakko
@@ -26,8 +28,7 @@ export const scrapeLutakko = async (): Promise<Gig[]> => {
       }
     })
   } catch (err) {
-    console.error("Error scraping Lutakko: ", err)
-    return []
+    throw err
   }
 }
 
@@ -73,8 +74,7 @@ export const scrapeIlokivi = async (): Promise<Gig[]> => {
       })
     )
   } catch (err) {
-    console.error("Error scraping Ilokivi: ", err)
-    return []
+    throw err
   }
 }
 
@@ -118,7 +118,14 @@ export const scrapePoppari = async (): Promise<Gig[]> => {
       })
       .filter((x): x is Gig => x !== undefined)
   } catch (err) {
-    console.error("Error scraping Poppari: ", err)
-    return []
+    throw err
   }
+}
+
+export const getTestGigs = (): Gig[] => {
+  return testgigs
+}
+
+export const getNewGigs = (): Gig[] => {
+  return newgigs
 }
