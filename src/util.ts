@@ -1,8 +1,6 @@
 import jsdom from "jsdom"
 import fetch from "node-fetch"
 import moment from "moment"
-import _ from "lodash"
-import { RSA_X931_PADDING } from "constants"
 
 /**
  * Return DOM of target URL
@@ -29,6 +27,21 @@ export const parseDate = (
   if (!reArr || reArr?.length === 0) return null
   const formatted = moment(reArr[0], "DD.MM.YYYY").format(outputFormat)
   return formatted
+}
+
+/**
+ * Get newly added gigs
+ * @param oldGigs
+ * @param newGigs
+ */
+export const getNewGigs = (oldGigs: Gig[], newGigs: Gig[]) => {
+  return newGigs.filter((n) =>
+    oldGigs.every(
+      (o) =>
+        n.title !== o.title && //title not found
+        n.date !== o.date //date not found
+    )
+  )
 }
 
 /**

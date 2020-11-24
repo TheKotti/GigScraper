@@ -1,5 +1,5 @@
 import { getDom, parseDate } from "./util"
-import testgigs from "./testgigs.json"
+import oldgigs from "./oldgigs.json"
 import newgigs from "./newgigs.json"
 
 /**
@@ -122,10 +122,10 @@ export const scrapePoppari = async (): Promise<Gig[]> => {
   }
 }
 
-export const getTestGigs = (): Gig[] => {
-  return testgigs
+export const getOldTestGigs = (): Gig[] => {
+  return oldgigs
 }
 
-export const getNewGigs = (): Gig[] => {
+export const getNewTestGigs = (): Gig[] => {
   return newgigs
 }
