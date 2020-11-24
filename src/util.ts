@@ -77,12 +77,12 @@ export const getSoldOut = (oldGigs: Gig[], newGigs: Gig[]) => {
 }
 
 /**
- * Return newly rescheduled gigs, with their new dates
+ * Return newly rescheduled gigs, with their new dates and old ids
  * @param oldGigs
  * @param newGigs
  */
 export const getRescheduled = (oldGigs: Gig[], newGigs: Gig[]) => {
-  return newGigs.filter((x) => {
+  const newFiltered = newGigs.filter((x) => {
     return oldGigs.some((x2) => {
       const c = oldGigs.filter((a) => a.title === x.title).length
       const c2 = newGigs.filter((a) => a.title === x.title).length
@@ -93,6 +93,22 @@ export const getRescheduled = (oldGigs: Gig[], newGigs: Gig[]) => {
       )
     })
   })
+  const oldFiltered = oldGigs.filter((x) => {
+    return newGigs.some((x2) => {
+      const c = oldGigs.filter((a) => a.title === x.title).length
+      const c2 = newGigs.filter((a) => a.title === x.title).length
+      return (
+        x.title === x2.title && //title matches
+        x.date !== x2.date && //date has changed
+        c === c2 //no new gigs with same title
+      )
+    })
+  })
+  const combined = oldFiltered.map((x, i) => {
+    return { ...x, date: newFiltered[i].date }
+  })
+
+  return combined
 }
 
 /**

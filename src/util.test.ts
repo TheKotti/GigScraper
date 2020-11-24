@@ -37,14 +37,37 @@ test("Sold out gigs are filtered correctly", () => {
   expect(soldOutTitles).toEqual(["BEHM"])
 })
 
-test("Rescheduled gigs are filtered correctly", () => {
-  const rescheduled = getRescheduled(oldGigs, newGigs)
-  const rescheduledTitles = rescheduled.map((x) => x.title)
-  expect(rescheduledTitles).toEqual(["Black crucifixion, Rodent epoch +1"])
-})
-
 test("New extra gigs are filtered correctly", () => {
   const extra = getNewExtraGigs(oldGigs, newGigs)
   const extraTitles = extra.map((x) => x.title)
   expect(extraTitles).toEqual(["Aavikko"])
+})
+
+test("Rescheduled gigs are filtered correctly", () => {
+  const rescheduled = getRescheduled(oldGigs, newGigs)
+  expect(rescheduled).toEqual([
+    {
+      id: 7,
+      title: "Black crucifixion, Rodent epoch +1",
+      date: "14.12.2020",
+      link:
+        "https://www.ilokivi.fi/tapahtumat/black-crucifixion-rodent-epoch-1",
+      venue: "Ilokivi",
+      price: "Liput 10 €",
+      soldOut: false,
+      cancelled: false,
+    },
+    {
+      id: 8,
+      title:
+        "Yiorgos Fakanas Group ft. Guthrie Govan (UK/GRE) + Mr. Fastfinger",
+      date: "07.06.2021",
+      link:
+        "https://www.ilokivi.fi/tapahtumat/yiorgos-fakanas-group-feat-guthrie-govan",
+      venue: "Ilokivi",
+      price: "Liput 35 €",
+      soldOut: false,
+      cancelled: false,
+    },
+  ])
 })

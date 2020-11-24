@@ -5,7 +5,12 @@ import {
   getOldTestGigs,
   getNewTestGigs,
 } from "./scrapers"
-import { addNewGigs } from "./db"
+import {
+  addNewGigs,
+  closeConnection,
+  updateCancelledAndSoldOutGigs,
+  updateRescheduledGigs,
+} from "./db"
 import {
   getCancelled,
   getSoldOut,
@@ -19,6 +24,7 @@ import {
 
   let gigs: Gig[] = []
 
+  //Get real data and add it to gigs array
   try {
     const lutakkoGigs = await scrapeLutakko()
     gigs = [...gigs, ...lutakkoGigs]
@@ -39,5 +45,28 @@ import {
   } catch (err) {
     console.error("Error scraping Poppari: ", err)
   }
-  console.log(gigs)
+
+  //Test data for running the program for the first time
+  /* const n = getNewGigs([], oldGigs)
+  const ne = getNewExtraGigs([], oldGigs)
+  const so = getSoldOut([], oldGigs)
+  const c = getCancelled([], oldGigs)
+  const r = getRescheduled([], oldGigs) */
+
+  //Test data for adding/updating data after the first time
+  /* const n = getNewGigs(oldGigs, newGigs)
+  const ne = getNewExtraGigs(oldGigs, newGigs)
+  const so = getSoldOut(oldGigs, newGigs)
+  const c = getCancelled(oldGigs, newGigs)
+  const r = getRescheduled(oldGigs, newGigs) */
+
+  //Run test datas into the database
+  /* try {
+    addNewGigs([...n, ...ne])
+    updateCancelledAndSoldOutGigs([...so, ...c])
+    updateRescheduledGigs(r)
+    closeConnection()
+  } catch (err) {
+    console.log(err)
+  } */
 })()
