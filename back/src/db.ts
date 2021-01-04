@@ -11,12 +11,32 @@ const conn = mysql.createConnection({
   database: process.env.DATABASE,
 })
 
+export const getAllGigs = () => {
+  try {
+    return new Promise((resolve, reject) => {
+      conn.query("SELECT * FROM gigs", (err, result) => {
+        return err ? reject(err) : resolve(result)
+      })
+    })
+  } catch (err) {
+    throw err
+  }
+}
+
 export const addNewGigs = (gigs: Gig[]) => {
   try {
     gigs.forEach((gig) => {
       conn.query(
-        "INSERT INTO gigs (title, date, price, link, soldOut, cancelled) VALUES (?, ?, ?, ?, ?, ?)",
-        [gig.title, gig.date, gig.price, gig.link, gig.soldOut, gig.cancelled]
+        "INSERT INTO gigs (title, date, price, link, soldOut, cancelled, venue) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [
+          gig.title,
+          gig.date,
+          gig.price,
+          gig.link,
+          gig.soldOut,
+          gig.cancelled,
+          gig.venue,
+        ]
       )
     })
     return "Gigs saved succesfully"

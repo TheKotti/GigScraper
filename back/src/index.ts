@@ -10,6 +10,7 @@ import {
   closeConnection,
   updateCancelledAndSoldOutGigs,
   updateRescheduledGigs,
+  getAllGigs,
 } from "./db"
 import {
   getCancelled,
@@ -25,7 +26,7 @@ import {
   let gigs: Gig[] = []
 
   //Get real data and add it to gigs array
-  try {
+  /* try {
     const lutakkoGigs = await scrapeLutakko()
     gigs = [...gigs, ...lutakkoGigs]
   } catch (err) {
@@ -44,10 +45,10 @@ import {
     gigs = [...gigs, ...poppariGigs]
   } catch (err) {
     console.error("Error scraping Poppari: ", err)
-  }
+  } */
 
   //Test data for running the program for the first time
-  /* const n = getNewGigs([], oldGigs)
+  /*   const n = getNewGigs([], oldGigs)
   const ne = getNewExtraGigs([], oldGigs)
   const so = getSoldOut([], oldGigs)
   const c = getCancelled([], oldGigs)
@@ -65,6 +66,13 @@ import {
     addNewGigs([...n, ...ne])
     updateCancelledAndSoldOutGigs([...so, ...c])
     updateRescheduledGigs(r)
+    closeConnection()
+  } catch (err) {
+    console.log(err)
+  } */
+  /* try {
+    const gigs = await getAllGigs()
+    console.log(JSON.stringify(gigs))
     closeConnection()
   } catch (err) {
     console.log(err)
